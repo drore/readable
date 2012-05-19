@@ -1,0 +1,14 @@
+{
+    "name" : "Your Extension" ,
+    "version" : "0.1" ,
+    "description" : "Does something awesome" ,
+    "background_page" : "background.html" ,
+    "permissions" : [] ,
+    "content_scripts" : [
+        {
+            "matches" : ["<all_urls>"] ,
+            "css" : ["styles/inject.css"] ,
+            "js" : ["scripts/inject.js"]
+        }
+    ]
+}
