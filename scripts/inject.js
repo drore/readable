@@ -66,20 +66,33 @@
         var possibleElements = document.querySelectorAll ('article,div,section,td,li');
         var articleObj = {
             wordCount : 0 ,
+            paragraphsCount:0,
             element : null
         };
         var length = possibleElements.length;
         for (var i = 0 ; i < length ; i++) {
             var element = possibleElements[i];
-            var wordCount = countWords (element);
-            console.log (wordCount);
-            if (wordCount > articleObj.wordCount && wordCount > minimumWords) {
+            var paragraphsCount = countParagraphs(element);
+            if (paragraphsCount > articleObj.paragraphsCount) {
                 articleObj.element = element;
-                articleObj.wordCount = wordCount
+                articleObj.wordCount = countWords (element);
+                articleObj.paragraphsCount = paragraphsCount;
             }
         }
 
         return articleObj;
+    }
+    
+    function countParagraphs(element){
+        var count = 0;
+        var len = element.childNodes.length;
+        for(var i=0;i<len;i++){
+            var childNode = element.childNodes[i];
+            if(childNode && childNode.nodeType == 1 && childNode.tagName.toLowerCase() == "p"){
+                count++;
+            }
+        }
+        return count;
     }
 
     function countWords (element) {
